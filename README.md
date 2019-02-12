@@ -1,2 +1,1 @@
-# Adage
-Adage Tool for Genetic Computation and Analysis
+# Adasolve Landing Page
