@@ -10,3 +10,4 @@ sklearn
 numpy
 pandas
 tensorflow
+biopython
