@@ -1,0 +1,45 @@
+html {
+  scroll-behavior: smooth;
+}
+
+@font-face
+{
+    font-family: HelveticaNeue;
+    src: {{ url_for('static', filename='HelveticaNeueLight.ttf') }};
+}
+
+body{
+	background-color: white;
+	font-family: Verdana;
+	font-size: 3vh;
+	text-align: justify;
+	background-size: contain;
+}
+
+a {text-decoration: none; }
+
+a:hover {
+   text-decoration:none;
+}
+
+#top_bar{
+	padding: 1%;
+	padding-left:3%;
+	font-size: 4vh;
+	
+}
+
+#body-content{
+	padding-left:2%;
+	padding-right:2%;
+
+}
+
+
+.col_with_bottom_small{
+	margin-bottom: 1.5vh;
+}
+
+.col_with_bottom_margin{
+	margin-bottom: 4vh;
+}

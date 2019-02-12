@@ -1,0 +1,86 @@
+
+<!DOCTYPE >
+<!DOCTYPE html>
+<html>
+<head>
+
+	<!-- Icon -->
+    <link rel="shortcut icon"  href="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/U%2B269B.svg/2000px-U%2B269B.svg.png">
+
+
+	<!-- Boostrap CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='main.css') }}">
+	<title>ADAGE Home</title>
+
+
+<!-- 	<script type="text/javascript">
+ $(document).ready(function() {
+    $('body').hide().fadeIn(200);
+    $("a").click(function(e) {
+        e.preventDefault();
+        $link = $(this).attr("href");
+        $("body").fadeOut(200,function(){
+          window.location =  $link; 
+        });
+    });
+ });
+
+	</script>
+ -->
+</head>
+<body>
+
+
+<div id="top_bar">
+		<a href="/home" style="color: black"><b>ADAGE</b></a>
+</div>
+
+<div id="body-content">
+
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
+  <a class="nav-item nav-link active" href="/home" style="color: grey">Home</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+		<a class="nav-item nav-link" href="/about">About</a>
+		<a class="nav-item nav-link active" href="/run">Run</a>
+		<a class="nav-item nav-link" href="/contact">Contact</a>
+
+
+    </div>
+  </div>
+</nav>
+
+<div style="height: 400px; width: 100%; margin-top:4vh; margin-bottom: 4vh; background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,.0)), url(https://images.unsplash.com/photo-1494506132334-19732cd53b32?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1502&q=80); 	background-size: cover;
+	background-repeat: no-repeat;
+	background-attachment: scroll;
+	background-position: center;">
+</div>
+
+<div class="container-fluid" style="position: relative;">
+	<div class="row">
+		<div class="col-md-12 col_with_bottom_margin_small">
+			<form action='/form' method="POST">
+				<input style="min-width: 50vh; max-width: 500px;" type="number" name="number_of_target_genes" min="1" max="15" placeholder="Number of target genes">
+				  <button type="submit" class="btn btn-primary">Submit</button>
+				  <br>
+				  <input type="checkbox" value="run_with_ten_percent" name="run_with_ten_percent"> Run with 10% of data
+
+			</form>
+		</div>
+	</div>
+</div>
+
+</div>
+
+</body>
+</html>
