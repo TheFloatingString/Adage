@@ -19,10 +19,10 @@ K.set_image_dim_ordering('th')
 from process_sequences import *
 
 # BioPython
-from Bio import Entrez
-from Bio.Seq import Seq
-from Bio.Alphabet import generic_dna
-from Bio import SeqIO
+# from Bio import Entrez
+# from Bio.Seq import Seq
+# from Bio.Alphabet import generic_dna
+# from Bio import SeqIO
 
 import json
 import time
