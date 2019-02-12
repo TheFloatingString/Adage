@@ -60,19 +60,53 @@
   </div>
 </nav>
 
-<div style="height: 400px; width: 100%; margin-top:4vh; margin-bottom: 4vh; background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,.0)), url(https://images.unsplash.com/photo-1494506132334-19732cd53b32?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1502&q=80); 	background-size: cover;
+<!-- <div style="height: 400px; width: 100%; margin-top:4vh; margin-bottom: 4vh; background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,.0)), url(https://images.unsplash.com/photo-1494506132334-19732cd53b32?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1502&q=80); 	background-size: cover;
 	background-repeat: no-repeat;
 	background-attachment: scroll;
 	background-position: center;">
-</div>
+</div> -->
+
+<img src = "{{url_for('static', filename='English Copy of Procedure.png')}}" style="width: 100%
+;">
 
 <div class="container-fluid" style="position: relative;">
 	<div class="row">
 		<div class="col-md-12 col_with_bottom_margin_small">
-			<div style="font-size: 4vh" class="col_with_bottom_margin_small">What is ADAGE?</div>
-			<p>ADAGE, or ADaptive Analysis of Genomic Elements, is a method that uses promoter sequences and the chromosomal locations
-				of target genes to identify corresponding transcription factors, key genes that activate these target genes.
-			</p>
+			<b><div style="font-size: 4vh" class="col_with_bottom_margin_small">What is ADAGE?</div></b>
+
+			<p>ADAGE stands for ADaptive Analysis of Genetic Elements. ADAGE is an algorithm that identifies transcription factors or genes with analog biological functions.</p>
+
+			<b><div style="font-size: 4vh" class="col_with_bottom_margin_small">What is ADAGE used for?</div></b>
+
+			<p>Given an ensemble of related genes, ADAGE can predict potential transcription factors and genes with similar functions.</p>
+
+			<p>For instance, if we supply ADAGE a list of genes known to assist neuron regeneration, ADAGE returns a list of genes it believes to be transcription factors or genes related to neuron regeneration.</p>
+
+			<b><div style="font-size: 4vh" class="col_with_bottom_margin_small">What advantages does ADAGE offer over existing gene prediction algorithms such as BLAST, FASTA and HMMER?</div></b>
+
+			<p>BLAST, FASTA and HMMER are algorithms that are mostly based on sequence alignment and empirical knowledge of the human genome. These algorithms have multiple uses which include searching for homologous genes (related ancestry) and sequences in large databases.</p>
+
+			<p>ADAGE integrates machine learning (a subfield or Artificial Intelligence) to learn sequences and to match transcription factors to their target genes. It recognizes patterns in genetic concepts that may be invisible or unknown to human observers. Hence, ADAGE is an adaptive computational method that creates rules based on existing data from genetic sequences and TF research. This model can be updated in the wake of new scientific advancements.</p>
+
+			<b><div style="font-size: 4vh" class="col_with_bottom_margin_small">How does ADAGE work?</div></b>
+
+			<p>ADAGE is a gene prediction algorithm built on 2 models: a chromosomal location-based and a genetic sequence model.</p>
+
+			<p>The chromosomal location-based model assigns a probability to a candidate transcription factor gene based on the probability that a transcription factor and a target gene occur on those 2 chromosomes. In common terms, if Elton John was a target gene and the places he visits are transcription factor genes, the probability that Elton is on a concert stage is higher than him being in the Arctic.</p>
+
+			<p>The gene prediction model uses the promoter sequence (2000 base pairs before the start of the gene and 500 base pairs after) to predict the amino acid composition of the corresponding transcription factor protein. It does this by using a Convolutional Neural Network, a machine learning algorithm with numerous applications in image recognition and object detection. It quantifies the similarity between the 2 genes by using a method called cosine similarity. In simpler terms, if a target gene is a lock and the transcription factor its key, this model looks through a bag of keys to find the matching one for the lock. </p>
+
+			<p>These 2 models then assign a score for each gene.</p>
+
+			<b><div style="font-size: 4vh" class="col_with_bottom_margin_small">On what scientific principles is ADAGE built on?</div></b>
+
+			<p>ADAGE is built on the TRRUST v2 database of published transcription factor relationships.  ADAGE’s genetic sequence model creates rules based on the relationship between a target gene and its transcription factor. It does this by analyzing 2 genetic sequences, one (target gene) directly extracted from the Human Genome published by PubMed, and the other (TF) from the database of all proteins from the human genome.</p>
+
+
+			<b><div style="font-size: 4vh" class="col_with_bottom_margin_small">Contact</div></b>
+
+			<p>Do consult <a href="/contact">the contact page</a>.</p>
+
 		</div>
 	</div>
 </div>

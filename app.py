@@ -203,98 +203,55 @@ def results():
 
 	start = time.time()
 
-	for gene_name in user.list_of_target_genes:
-		# get gene position information from search
-		print(df_gene_locations_cleaned.shape)
-		print(gene_name)
-		gene_information_list = df_gene_locations_cleaned.loc[df_gene_locations_cleaned['gene name'] == gene_name]
-		print(gene_information_list)
-		print(gene_information_list.iloc[0]["chromosome"])
-		print(gene_information_list.iloc[0]["start"])
-		print(gene_information_list.iloc[0]["end"])
-		chromosome_index = int(gene_information_list.iloc[0]["chromosome"]-1)
-		print(chromosome_keys[chromosome_index])
+	try:
 
-		predictions_genes.append(one_hot_dna(gene_promoters_one_hot_dict[gene_name]))
-
-		user.add_gene_list(gene_information_list)		# add gene information to user object
-
-	predictions_genes = np.array(predictions_genes)
-	print("predictions_shape", predictions_genes.shape)
-	prediction = model.predict(predictions_genes.reshape(len(user.list_of_target_genes),1,2500,4))		# prediction is accurate
-
-	similarities = []
-	# locations_keys = list(locations.keys())
-
-	# used for counting
-	counter = 0
-	nb_gene = 0
-	num_aa = 0
-
-	print(user.run_with_ten_percent)
-
-	if not user.run_with_ten_percent:
-
-		# for gene prediction, gene name in submitted target genes
-		for gene, gene_name in zip(prediction,user.list_of_target_genes):
-
+		for gene_name in user.list_of_target_genes:
+			# get gene position information from search
+			print(df_gene_locations_cleaned.shape)
 			print(gene_name)
-			print(gene)
+			gene_information_list = df_gene_locations_cleaned.loc[df_gene_locations_cleaned['gene name'] == gene_name]
+			print(gene_information_list)
+			print(gene_information_list.iloc[0]["chromosome"])
+			print(gene_information_list.iloc[0]["start"])
+			print(gene_information_list.iloc[0]["end"])
+			chromosome_index = int(gene_information_list.iloc[0]["chromosome"]-1)
+			print(chromosome_keys[chromosome_index])
 
-			temp_row = []	# row with probabilities for each target gene
-			print(gene_name)
-			print(df_gene_locations_cleaned.loc[df_gene_locations_cleaned["gene name"] == gene_name])
-			print(int(df_gene_locations_cleaned.loc[df_gene_locations_cleaned["gene name"] == gene_name].iloc[0]['chromosome']))
-			target_gene_location = int(df_gene_locations_cleaned.loc[df_gene_locations_cleaned["gene name"] == gene_name].iloc[0]['chromosome'])
+			predictions_genes.append(one_hot_dna(gene_promoters_one_hot_dict[gene_name]))
 
-			for tf_gene_name, row in zip(list(protein_aa_frequencies_dict.keys()), list(protein_aa_frequencies_dict.values())):
-				if nb_gene%1000 == 0:
-					print(nb_gene)
-				if tf_gene_name in list(df_gene_locations_cleaned["gene name"].values):
-					cosine_score = cosine_similarity(gene, row)
-					# get tf gene location
-					tf_gene_location = int(df_gene_locations_cleaned.loc[df_gene_locations_cleaned["gene name"] == tf_gene_name].iloc[0]['chromosome'])
+			user.add_gene_list(gene_information_list)		# add gene information to user object
 
+		predictions_genes = np.array(predictions_genes)
+		print("predictions_shape", predictions_genes.shape)
+		prediction = model.predict(predictions_genes.reshape(len(user.list_of_target_genes),1,2500,4))		# prediction is accurate
 
-					if tf_gene_location > -1:
-						# print(cosine_similarity(gene, row))
-						# print(probability_matrix[target_gene_location-1][tf_gene_location-1])
-						# print()
-						temp_row.append(cosine_similarity(gene, row)*probability_matrix[target_gene_location-1][tf_gene_location-1])
-					else:
-						temp_row.append(0)
-				else:
-					temp_row.append(0)
-				nb_gene += 1
-			        
-			similarities.append(temp_row)
-		#         print(similarities)
+		similarities = []
+		# locations_keys = list(locations.keys())
 
-			counter += 1
-			num_aa += 1
+		# used for counting
+		counter = 0
+		nb_gene = 0
+		num_aa = 0
 
-	else:
-		# for gene prediction, gene name in submitted target genes
-		for gene, gene_name in zip(prediction,user.list_of_target_genes):
+		print(user.run_with_ten_percent)
 
-			print(gene_name)
-			print(gene)			# gene prediction is unaltered
+		if not user.run_with_ten_percent:
 
-			temp_row = []		# row with probabilities for each target gene
-			print("gene name", gene_name)
-			print("row output", df_gene_locations_cleaned.loc[df_gene_locations_cleaned["gene name"] == gene_name])
-			print("int of chromosome", int(df_gene_locations_cleaned.loc[df_gene_locations_cleaned["gene name"] == gene_name].iloc[0]['chromosome']))
-			target_gene_location = int(df_gene_locations_cleaned.loc[df_gene_locations_cleaned["gene name"] == gene_name].iloc[0]['chromosome'])
+			# for gene prediction, gene name in submitted target genes
+			for gene, gene_name in zip(prediction,user.list_of_target_genes):
 
+				print(gene_name)
+				print(gene)
 
-			for tf_gene_name, row in zip(list(protein_aa_frequencies_dict.keys()),list(protein_aa_frequencies_dict.values())):
-				random_seed = random.randrange(0,10)
-				if nb_gene%1000 == 0:
-					print("genes seen", nb_gene)
+				temp_row = []	# row with probabilities for each target gene
+				print(gene_name)
+				print(df_gene_locations_cleaned.loc[df_gene_locations_cleaned["gene name"] == gene_name])
+				print(int(df_gene_locations_cleaned.loc[df_gene_locations_cleaned["gene name"] == gene_name].iloc[0]['chromosome']))
+				target_gene_location = int(df_gene_locations_cleaned.loc[df_gene_locations_cleaned["gene name"] == gene_name].iloc[0]['chromosome'])
 
-				# if True:
-				if random_seed == 0:
-
+				for tf_gene_name, row in zip(list(protein_aa_frequencies_dict.keys()), list(protein_aa_frequencies_dict.values())):
+					if nb_gene%1000 == 0:
+						print(nb_gene)
 					if tf_gene_name in list(df_gene_locations_cleaned["gene name"].values):
 						cosine_score = cosine_similarity(gene, row)
 						# get tf gene location
@@ -304,85 +261,133 @@ def results():
 						if tf_gene_location > -1:
 							# print(cosine_similarity(gene, row))
 							# print(probability_matrix[target_gene_location-1][tf_gene_location-1])
-							# print(cosine_similarity(gene, row)*probability_matrix[target_gene_location-1][tf_gene_location-1])
 							# print()
-
-							# values are accurate
 							temp_row.append(cosine_similarity(gene, row)*probability_matrix[target_gene_location-1][tf_gene_location-1])
 						else:
 							temp_row.append(0)
 					else:
 						temp_row.append(0)
-				else:
-					temp_row.append(0)
+					nb_gene += 1
+				        
+				similarities.append(temp_row)
+			#         print(similarities)
 
-				nb_gene += 1
 				counter += 1
 				num_aa += 1
 
-					        
-			similarities.append(temp_row)
+		else:
+			# for gene prediction, gene name in submitted target genes
+			for gene, gene_name in zip(prediction,user.list_of_target_genes):
+
+				print(gene_name)
+				print(gene)			# gene prediction is unaltered
+
+				temp_row = []		# row with probabilities for each target gene
+				print("gene name", gene_name)
+				print("row output", df_gene_locations_cleaned.loc[df_gene_locations_cleaned["gene name"] == gene_name])
+				print("int of chromosome", int(df_gene_locations_cleaned.loc[df_gene_locations_cleaned["gene name"] == gene_name].iloc[0]['chromosome']))
+				target_gene_location = int(df_gene_locations_cleaned.loc[df_gene_locations_cleaned["gene name"] == gene_name].iloc[0]['chromosome'])
+
+
+				for tf_gene_name, row in zip(list(protein_aa_frequencies_dict.keys()),list(protein_aa_frequencies_dict.values())):
+					random_seed = random.randrange(0,10)
+					if nb_gene%1000 == 0:
+						print("genes seen", nb_gene)
+
+					# if True:
+					if random_seed == 0:
+
+						if tf_gene_name in list(df_gene_locations_cleaned["gene name"].values):
+							cosine_score = cosine_similarity(gene, row)
+							# get tf gene location
+							tf_gene_location = int(df_gene_locations_cleaned.loc[df_gene_locations_cleaned["gene name"] == tf_gene_name].iloc[0]['chromosome'])
+
+
+							if tf_gene_location > -1:
+								# print(cosine_similarity(gene, row))
+								# print(probability_matrix[target_gene_location-1][tf_gene_location-1])
+								# print(cosine_similarity(gene, row)*probability_matrix[target_gene_location-1][tf_gene_location-1])
+								# print()
+
+								# values are accurate
+								temp_row.append(cosine_similarity(gene, row)*probability_matrix[target_gene_location-1][tf_gene_location-1])
+							else:
+								temp_row.append(0)
+						else:
+							temp_row.append(0)
+					else:
+						temp_row.append(0)
+
+					nb_gene += 1
+					counter += 1
+					num_aa += 1
+
+						        
+				similarities.append(temp_row)
 
 
 
-	print("len temp row", len(temp_row))
-	print("len aa dict", num_aa)
+		print("len temp row", len(temp_row))
+		print("len aa dict", num_aa)
 
-	similarities = np.array(similarities).T			# similarities is accurate
-	print("length of similarities", similarities.shape)
+		similarities = np.array(similarities).T			# similarities is accurate
+		print("length of similarities", similarities.shape)
 
-	scores = []
-	raw_scores = []
+		scores = []
+		raw_scores = []
 
-	print(similarities)
-	print("|||")
+		print(similarities)
+		print("|||")
 
-	print("length of similarities" + str((len(similarities))) + ' ' + str(len(similarities[0])))
+		print("length of similarities" + str((len(similarities))) + ' ' + str(len(similarities[0])))
 
-	# for gene name, row of probabilities per transcription factor
-	for gene_name, row in zip(list(protein_aa_frequencies_dict.keys()), similarities): 
-		# print(gene_name)
-		temp_row = [gene_name, sum(row)/len(row)]
-		scores.append(temp_row)
-		raw_scores.append(temp_row[1])
+		# for gene name, row of probabilities per transcription factor
+		for gene_name, row in zip(list(protein_aa_frequencies_dict.keys()), similarities): 
+			# print(gene_name)
+			temp_row = [gene_name, sum(row)/len(row)]
+			scores.append(temp_row)
+			raw_scores.append(temp_row[1])
 
-	sorted_list = sorted(scores, key=lambda x: x[1], reverse=True)
-	top_100_sorted_list = sorted_list[:100]
-	print(top_100_sorted_list)
+		sorted_list = sorted(scores, key=lambda x: x[1], reverse=True)
+		top_100_sorted_list = sorted_list[:100]
+		print(top_100_sorted_list)
 
-	end = time.time()
+		end = time.time()
 
-	elapsed = end - start
+		elapsed = end - start
 
-	print(f"Elapsed time:{elapsed} seconds.")
+		print(f"Elapsed time:{elapsed} seconds.")
 
-	plt.hist(raw_scores)
-	plt.savefig("distribution.png")
-	plt.close()
+		plt.hist(raw_scores)
+		plt.savefig("distribution.png")
+		plt.close()
 
-	table_of_results = """		<table class="table table-hover">
-			<thead>
-				<th scope="col">Rank</th>
-				<th scope="col">Gene Name</th>
-				<th scope="col">Score</th>
-			</thead>
-			<tbody>"""
+		table_of_results = """		<table class="table table-hover">
+				<thead>
+					<th scope="col">Rank</th>
+					<th scope="col">Gene Name</th>
+					<th scope="col">Score</th>
+				</thead>
+				<tbody>"""
 
-	table_row_counter = 0
-	for row in top_100_sorted_list:
-		table_row_counter += 1
-		row_string = f"""    <tr>
-		<th scope="row">{table_row_counter}</th>
-		<td><a target="_blank" href="https://www.ncbi.nlm.nih.gov/gene/?term={row[0]}">{row[0]}</a></td>
-		<td>{row[1]}</td>
-		</tr>"""
-		table_of_results += row_string
+		table_row_counter = 0
+		for row in top_100_sorted_list:
+			table_row_counter += 1
+			row_string = f"""    <tr>
+			<th scope="row">{table_row_counter}</th>
+			<td><a target="_blank" href="https://www.ncbi.nlm.nih.gov/gene/?term={row[0]}">{row[0]}</a></td>
+			<td>{row[1]}</td>
+			</tr>"""
+			table_of_results += row_string
 
-	table_of_results = table_of_results + """</tbody>
-		</table>"""
+		table_of_results = table_of_results + """</tbody>
+			</table>"""
 
 
-	return render_template("hoverable_results.html", table_of_results=table_of_results, elapsed_time=elapsed)
+		return render_template("hoverable_results.html", table_of_results=table_of_results, elapsed_time=elapsed)
+
+	except KeyError:
+		return "You entered a gene that isn't yet included in this database. Please contact Laurence at https://adage.herokuapp.com/contact"
 
 
 @app.route('/contact')
