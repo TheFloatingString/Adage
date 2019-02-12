@@ -360,7 +360,29 @@ def results():
 	plt.savefig("distribution.png")
 	plt.close()
 
-	return render_template("results.html", results=top_100_sorted_list)
+	table_of_results = """		<table class="table table-hover">
+			<thead>
+				<th scope="col">Rank</th>
+				<th scope="col">Gene Name</th>
+				<th scope="col">Score</th>
+			</thead>
+			<tbody>"""
+
+	table_row_counter = 0
+	for row in top_100_sorted_list:
+		table_row_counter += 1
+		row_string = f"""    <tr>
+		<th scope="row">{table_row_counter}</th>
+		<td><a target="_blank" href="https://www.ncbi.nlm.nih.gov/gene/?term={row[0]}">{row[0]}</a></td>
+		<td>{row[1]}</td>
+		</tr>"""
+		table_of_results += row_string
+
+	table_of_results = table_of_results + """</tbody>
+		</table>"""
+
+
+	return render_template("hoverable_results.html", table_of_results=table_of_results, elapsed_time=elapsed)
 
 
 @app.route('/contact')
