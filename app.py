@@ -188,8 +188,8 @@ def loading():
 		for form_input_name in list(request.form.keys()):
 			print("form_input_name: ", form_input_name)
 			gene_name = request.form[form_input_name]
-			user.add_gene_name(gene_name)
-			print(gene_name)
+			user.add_gene_name(gene_name.upper())
+			print(gene_name.upper())
 
 		return results()
 	return "DONE!"
@@ -253,7 +253,7 @@ def results():
 					if nb_gene%1000 == 0:
 						print(nb_gene)
 					if tf_gene_name in list(df_gene_locations_cleaned["gene name"].values):
-						cosine_score = cosine_similarity(gene, row)
+						cosine_score = cosine_similarity(gene, [value/200 for value in row])
 						# get tf gene location
 						tf_gene_location = int(df_gene_locations_cleaned.loc[df_gene_locations_cleaned["gene name"] == tf_gene_name].iloc[0]['chromosome'])
 
