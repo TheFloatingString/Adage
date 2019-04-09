@@ -1,0 +1,117 @@
+
+<!DOCTYPE >
+<!DOCTYPE html>
+<html>
+<head>
+
+	<!-- Icon -->
+    <link rel="shortcut icon"  href="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/U%2B269B.svg/2000px-U%2B269B.svg.png">
+
+
+	<!-- Boostrap CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='main.css') }}">
+	<title>ADAGE Home</title>
+
+
+<!-- 	<script type="text/javascript">
+ $(document).ready(function() {
+    $('body').hide().fadeIn(200);
+    $("a").click(function(e) {
+        e.preventDefault();
+        $link = $(this).attr("href");
+        $("body").fadeOut(200,function(){
+          window.location =  $link; 
+        });
+    });
+ });
+
+	</script>
+ -->
+</head>
+<body>
+
+
+<div id="top_bar">
+		<a href="/home" style="color: black"><b>ADAGE</b></a>
+</div>
+
+<div id="body-content">
+
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
+  <a class="nav-item nav-link active" href="/home_fr" style="color: black">Accueil</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+		<a class="nav-item nav-link" href="/about_fr">À propos</a>
+		<a class="nav-item nav-link" href="/run_fr">Démarrer</a>
+		<a class="nav-item nav-link" href="/contact_fr">Contact</a>
+
+
+    </div>
+  </div>
+</nav>
+
+<!-- <div style="height: 400px; width: 100%; margin-top:4vh; margin-bottom: 4vh; background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,.0)), url(https://images.unsplash.com/photo-1494506132334-19732cd53b32?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1502&q=80); 	background-size: cover;
+	background-repeat: no-repeat;
+	background-attachment: scroll;
+	background-position: center;">
+</div> -->
+
+<img src = "{{url_for('static', filename='Francais_Procedure.jpg')}}" style="width: 100%
+;">
+
+<div class="container-fluid" style="position: relative;">
+	<div class="row">
+		<div class="col-md-12 col_with_bottom_margin_small">
+			<b><div style="font-size: 4vh" class="col_with_bottom_margin_small">Qu'est-ce ADAGE?</div></b>
+
+			<p>ADAGE signifie Analyse adaptive des éléments génétiques. Adage est capable d'identifier des facteurs de transcription et de répérer des gènes qui ont des fonctions analogues.</p>
+
+			<b><div style="font-size: 4vh" class="col_with_bottom_margin_small">À quoi sert ADAGE?</div></b>
+
+			<p>Avec un ensemble de gènes cibles reliés, ADAGE peut prédire des gènes facteurs de transcription posibles.</p>
+<!-- 
+			<p>For instance, if we supply ADAGE a list of genes known to assist neuron regeneration, ADAGE returns a list of genes it believes to be transcription factors or genes related to neuron regeneration.</p> -->
+
+			<b><div style="font-size: 4vh" class="col_with_bottom_margin_small">Quels sont les avantages qu'offre ADAGE par rapport aux algorithmes existants comme HMMER, BLAST et FASTA</div></b>
+
+			<p>BLAST, FASTA et HMMER sont des algorithmes qui sont basés sur des données empiriques et sur l'alignement des séquences génétiques. Ces algorithmes ont de multiples usages qui incluent la recherche de gènes homologues et la recherche des séquences génétiques dans de larges bases de données.</p>
+
+			<p>ADAGE utilise de l'apprentissage automotique (une forme d'intelligence artificielle) pour apprrendre des séquences génétiques et à trouver des facteurs de transcription correspodants. ADAGE peut reconnaître des motifs génétiques qui sont inconnus ou invisibles à un observateur humain. Ainsi, ADAGE est un méthode informatique qui créé des règles en se basant sur des données scientifiques existantes de la recherche des séquences génétiques et de la recherche des facteurs de transcription. Ce modèle a aussi la possibilité d'être mis à jour selon les avancées scientifiques.</p>
+
+			<b><div style="font-size: 4vh" class="col_with_bottom_margin_small">Comment fonctionne ADAGE?</div></b>
+
+			<p>ADAGE est un algorithme de prédiction de gènes qui est construit sus 2 modèles: une matrice de probabilité selon le positionnement des chromosomes et un modèle de prédiction de séquences génétiques.</p>
+
+			<p>La matrice de probabilité donne un coefficient de force à un gène cible en se basant sur son positionnement choromosomal et celui de son gène activateur</p>
+
+			<p>Le modèle de prédiction de séquences génétiques utilise les séquences de promoteurs (2000 bases azotées avant et 500 après le début du gène) pour prédire la composition en acides aminées d'un facteur de transcription potentiel. Il fait ceci en utilisant un réseau neuronal convolutif, un algorithme d'apprenstissage automatique qui est utilisé dans l'identification d'images. Ce modèle quantifie ensuite la similarité entre le gène activateur prédit et le gène activateur réel par la similarité cosinus.</p>
+
+			<p>Ces deux modèles attribuent ensuite un score au gène candidat.</p>
+
+			<b><div style="font-size: 4vh" class="col_with_bottom_margin_small">Quel est le fondement scientifique d'ADAGE</div></b>
+
+			<p>ADAGE est construit à partir de la base de données de TRRUST v2, un ensemble d'interactions connues de gènes cibles-gènes activés.</p>
+
+
+			<b><div style="font-size: 4vh" class="col_with_bottom_margin_small">Contact</div></b>
+
+			<p>Veuillez consulter <a href="/contact_fr">le page de contact</a>.</p>
+
+		</div>
+	</div>
+</div>
+
+</div>
+
+</body>
+</html>

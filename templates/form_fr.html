@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<!-- Icon -->
+    <link rel="shortcut icon"  href="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/U%2B269B.svg/2000px-U%2B269B.svg.png">
+
+
+	<!-- Boostrap CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='main.css') }}">
+	<title>ADAGE Formulaire</title>
+
+	<style>
+
+	#content{
+		padding: 50px;
+	}
+
+	#loading_div{
+		padding: 20px;
+		padding-right: auto;
+		padding-left: auto;
+		display: none;
+	}
+
+	</style>
+
+
+<!-- 	<script type="text/javascript">
+ $(document).ready(function() {
+    $('body').hide().fadeIn(200);
+    $("a").click(function(e) {
+        e.preventDefault();
+        $link = $(this).attr("href");
+        $("body").fadeOut(200,function(){
+          window.location =  $link; 
+        });
+    });
+ });
+
+	</script>
+ -->
+
+ 	<script type="text/javascript">
+ 		function show_loading_gif(){
+		  var x = document.getElementById("loading_div");
+			  // if (x.style.display === "none") {
+			    x.style.display = "block";
+			  // } else {
+			  //   x.style.display = "none";
+			  // }
+ 		}
+ 	</script>
+</head>
+<body>
+
+	<header>
+		
+	</header>
+
+	<div id="content">	
+		<h3>Formulaire de prédiction de facteurs de transcription</h3>
+
+			<form action="/loading/fra" method="POST">
+
+			<p>Temps estimé: {{prediction_eta}} minutes
+
+			<br>
+
+			{{form_string|safe}}
+			
+			<input type="submit" onclick="show_loading_gif()">
+			</form>
+
+			<div id="loading_div">
+				<img src="/static/loading_gif.gif">
+			</div>
+
+	</div>
+
+
+
+</body>
+</html>

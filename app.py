@@ -128,17 +128,29 @@ user = User()		# initialize user object
 def home():
 	return render_template("home.html")
 
+@app.route('/home_fr')
+def home_fr():
+	return render_template("home_fr.html")
+
 @app.route('/about')
 def about():
 	return render_template("about.html")
+
+@app.route('/about_fr')
+def about_fr():
+	return render_template("about_fr.html")
 
 # form page
 @app.route('/run')
 def run():
 	return render_template("number_of_genes.html")
 
-@app.route('/form', methods=["GET", "POST"])
-def form():
+@app.route("/run_fr")
+def run_fr():
+	return render_template("number_of_genes_fr.html")
+
+@app.route('/form/<language>', methods=["GET", "POST"])
+def form(language):
 
 	global user
 
@@ -172,11 +184,14 @@ def form():
 			user.run_with_ten_percent = False
 
 		prediction_eta = (counter-1)*2 		# predicted time for prediction in minutes
-	return render_template("form.html", list_of_genes=list_of_gene_names, form_string=form_string, prediction_eta=prediction_eta)
+	if language == "eng":
+		return render_template("form.html", list_of_genes=list_of_gene_names, form_string=form_string, prediction_eta=prediction_eta)
+	elif language == "fra":
+		return render_template("form_fr.html", list_of_genes=list_of_gene_names, form_string=form_string, prediction_eta=prediction_eta)
 
 # loading page
-@app.route("/loading", methods=["GET", "POST"])
-def loading():
+@app.route("/loading/<language>", methods=["GET", "POST"])
+def loading(language):
 	global user
 	user.list_of_target_genes = []
 	print("LIST OF KEYS: ", str(list(request.form.keys())))
@@ -191,12 +206,12 @@ def loading():
 			user.add_gene_name(gene_name.upper())
 			print(gene_name.upper())
 
-		return results()
+		return results(language)
 	return "DONE!"
 
 # processing page
 @app.route("/results")
-def results():
+def results(language=''):
 	global user
 
 	predictions_genes = []
@@ -362,13 +377,24 @@ def results():
 		plt.savefig("distribution.png")
 		plt.close()
 
-		table_of_results = """		<table class="table table-hover">
-				<thead>
-					<th scope="col">Rank</th>
-					<th scope="col">Gene Name</th>
-					<th scope="col">Score</th>
-				</thead>
-				<tbody>"""
+		if language == "eng":
+			table_of_results = """		<table class="table table-hover">
+					<thead>
+						<th scope="col">Rank</th>
+						<th scope="col">Gene Name</th>
+						<th scope="col">Score</th>
+					</thead>
+					<tbody>"""
+
+		elif language == "fra":
+			table_of_results = """		<table class="table table-hover">
+					<thead>
+						<th scope="col">Classement</th>
+						<th scope="col">Nom</th>
+						<th scope="col">Score</th>
+					</thead>
+					<tbody>"""
+
 
 		table_row_counter = 0
 		for row in top_100_sorted_list:
@@ -383,8 +409,10 @@ def results():
 		table_of_results = table_of_results + """</tbody>
 			</table>"""
 
-
-		return render_template("hoverable_results.html", table_of_results=table_of_results, elapsed_time=elapsed)
+		if language == "eng":
+			return render_template("hoverable_results.html", table_of_results=table_of_results, elapsed_time=elapsed)
+		elif language == "fra":
+			return render_template("hoverable_results_fr.html", table_of_results=table_of_results, elapsed_time=elapsed)
 
 	except KeyError:
 		return "You entered a gene that isn't yet included in this database. Please contact Laurence at https://adage.herokuapp.com/contact"
@@ -393,6 +421,10 @@ def results():
 @app.route('/contact')
 def contact():
 	return render_template("contact.html")
+
+@app.route('/contact_fr')
+def contact_fr():
+	return render_template("contact_fr.html")
 
 # run app
 if __name__ == '__main__':
