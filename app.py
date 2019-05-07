@@ -255,6 +255,11 @@ def results(language=''):
 			# for gene prediction, gene name in submitted target genes
 			for gene, gene_name in zip(prediction,user.list_of_target_genes):
 
+				# filter function
+				if False:
+					break
+
+
 				print(gene_name)
 				print(gene)
 

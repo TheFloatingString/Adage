@@ -40,6 +40,20 @@
 
 	</script>
  -->
+
+ <script type="text/javascript">
+
+ 	 		function show_loading_gif(){
+		  var x = document.getElementById("loading_div");
+			  // if (x.style.display === "none") {
+			    x.style.display = "block";
+			  // } else {
+			  //   x.style.display = "none";
+			  // }
+ 		}
+
+
+ </script>
 </head>
 <body>
 
@@ -58,8 +72,13 @@
 
 			{{form_string|safe}}
 			
-			<input type="submit">
+			<input type="submit" onclick="show_loading_gif()">
 			</form>
+
+
+			<div id="loading_div">
+				<img src="/static/loading_gif.gif">
+			</div>
 	</div>
 
 
