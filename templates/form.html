@@ -23,6 +23,14 @@
 		padding: 50px;
 	}
 
+	#loading_div{
+		padding: 20px;
+		padding-right: auto;
+		padding-left: auto;
+		display: none;
+	}
+
+
 	</style>
 
 
@@ -67,6 +75,7 @@
 			<form action="/loading/eng" method="POST">
 
 			<p>Estimated prediction time: {{prediction_eta}} minutes
+			<p style="color:red;"><i>This version of ADAGE 3 hasn't been updated with TRRUST hierarchical data</i></p>
 
 			<br>
 
