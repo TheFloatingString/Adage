@@ -18,6 +18,9 @@ K.set_image_dim_ordering('th')
 
 from process_sequences import *
 
+# custom modules
+from predict_tf import Predictor
+
 # BioPython
 # from Bio import Entrez
 # from Bio.Seq import Seq
@@ -250,7 +253,29 @@ def results(language=''):
 
 		print(user.run_with_ten_percent)
 
-		if not user.run_with_ten_percent:
+		run_with_predict_tf = True
+		if run_with_predict_tf:
+
+			# code for predict_tf.py
+
+
+			# for gene_name in user.list_of_gene_names:
+				# target_gene_location = int(df_gene_locations_cleaned.loc[df_gene_locations_cleaned["gene name"] == gene_name].iloc[0]['chromosome'])
+				# dict_of_target_genes{gene_name: target_gene_location}
+
+			run_fraction = False
+			if user.run_with_ten_percent:
+				run_fraction = True 
+
+			predictor_object = Predictor(user.list_of_target_genes, run_fraction)
+			list_of_predictions = predictor_object.return_scores()
+
+
+
+
+
+		# if user not run with 10%
+		elif not user.run_with_ten_percent:
 
 			# for gene prediction, gene name in submitted target genes
 			for gene, gene_name in zip(prediction,user.list_of_target_genes):
@@ -347,30 +372,36 @@ def results(language=''):
 
 
 
-		print("len temp row", len(temp_row))
-		print("len aa dict", num_aa)
+		# print("len temp row", len(temp_row))
+		# print("len aa dict", num_aa)
 
-		similarities = np.array(similarities).T			# similarities is accurate
-		print("length of similarities", similarities.shape)
+		# similarities = np.array(similarities).T			# similarities is accurate
+		# print("length of similarities", similarities.shape)
 
-		scores = []
-		raw_scores = []
+		# scores = []
+		# raw_scores = []
 
-		print(similarities)
-		print("|||")
+		# print(similarities)
+		# print("|||")
 
-		print("length of similarities" + str((len(similarities))) + ' ' + str(len(similarities[0])))
+		# print("length of similarities" + str((len(similarities))) + ' ' + str(len(similarities[0])))
 
-		# for gene name, row of probabilities per transcription factor
-		for gene_name, row in zip(list(protein_aa_frequencies_dict.keys()), similarities): 
-			# print(gene_name)
-			temp_row = [gene_name, sum(row)/len(row)]
-			scores.append(temp_row)
-			raw_scores.append(temp_row[1])
+		# # for gene name, row of probabilities per transcription factor
+		# # for gene_name, row in zip(list(protein_aa_frequencies_dict.keys()), similarities): 
+		# # 	# print(gene_name)
+		# # 	temp_row = [gene_name, sum(row)/len(row)]
+		# # 	scores.append(temp_row)
+		# # 	raw_scores.append(temp_row[1])
 
-		sorted_list = sorted(scores, key=lambda x: x[1], reverse=True)
+		# # list of sorted genes
+		# sorted_list = sorted(scores, key=lambda x: x[1], reverse=True)
+
+		# # top 100 sorted genes
+		# top_100_sorted_list = sorted_list[:100]
+		# print(top_100_sorted_list)
+
+		sorted_list = list_of_predictions
 		top_100_sorted_list = sorted_list[:100]
-		print(top_100_sorted_list)
 
 		end = time.time()
 
@@ -378,9 +409,9 @@ def results(language=''):
 
 		print(f"Elapsed time:{elapsed} seconds.")
 
-		plt.hist(raw_scores)
-		plt.savefig("distribution.png")
-		plt.close()
+		# plt.hist(raw_scores)
+		# plt.savefig("distribution.png")
+		# plt.close()
 
 		if language == "eng":
 			table_of_results = """		<table class="table table-hover">
