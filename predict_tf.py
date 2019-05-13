@@ -113,7 +113,7 @@ class Predictor():
 			print("TARGET GENE:", gene_name)
 			temp_row = []
 
-			gene_name_file = "static\\\\V5-activation_results"+gene_name+".csv"
+			gene_name_file = "static/V5-activation_results"+gene_name+".csv"
 
 			print(gene_name_file)
 			print(self.list_of_all_files)
