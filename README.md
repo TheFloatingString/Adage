@@ -15,6 +15,8 @@ python app.py
 
 Note: as of January 4, 2023, there are potential runtime issues due to Python dependency versioning and internal model dimension changes.
 
+The website is also temporarily down, though this project will be continued and re-deployed, with a target date of mid-2023.
+
 Please feel free to report any runtime errors via Issues on the GitHub repo.
 
 Thank you in advance!
